@@ -1,6 +1,6 @@
 package io.vitorgsevero.project.endpoint;
 
-import io.vitorgsevero.project.error.CustomErrrorType;
+import io.vitorgsevero.project.error.CustomErrorType;
 import io.vitorgsevero.project.model.Student;
 import io.vitorgsevero.project.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class StudentEndpoint {
         int index = Student.studentList.indexOf(student);
 
         if(index == -1){
-            return new ResponseEntity<>(new CustomErrrorType("student not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new CustomErrorType("student not found"), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(Student.studentList.get(index), HttpStatus.OK);

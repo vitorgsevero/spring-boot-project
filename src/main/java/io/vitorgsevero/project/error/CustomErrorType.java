@@ -1,9 +1,9 @@
 package io.vitorgsevero.project.error;
 
-public class CustomErrrorType {
+public class CustomErrorType {
     private String errorMessage;
 
-    public CustomErrrorType(String errorMessage) {
+    public CustomErrorType(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 

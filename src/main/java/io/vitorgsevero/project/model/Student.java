@@ -12,9 +12,7 @@ public class Student {
     private String name;
     public static List<Student> studentList;
 
-    static{
-        studentRepository();
-    }
+
 
     public Student(int id, String name) {
         this(name);
@@ -28,9 +26,6 @@ public class Student {
     public Student(){
     }
 
-    private static void studentRepository(){
-        studentList = new ArrayList<>(asList(new Student(1, "Vitor"), new Student(2, "Gustavo")));
-    }
 
     private static void asList() {
     }
