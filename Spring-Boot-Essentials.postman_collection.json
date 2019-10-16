@@ -45,6 +45,27 @@
 			"response": []
 		},
 		{
+			"name": "GET - Find By Name Ignore Case Sensitive",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/students/findbyname/Gustavo Severo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"students",
+						"findbyname",
+						"Gustavo Severo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "PUT - Updating Student",
 			"request": {
 				"method": "PUT",
