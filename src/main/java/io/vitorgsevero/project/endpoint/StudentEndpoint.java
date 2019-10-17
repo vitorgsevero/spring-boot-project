@@ -1,6 +1,7 @@
 package io.vitorgsevero.project.endpoint;
 
 import io.vitorgsevero.project.error.CustomErrorType;
+import io.vitorgsevero.project.error.ResourceNotFoundException;
 import io.vitorgsevero.project.model.Student;
 import io.vitorgsevero.project.repository.StudentRepository;
 import org.springframework.http.HttpStatus;
@@ -24,12 +25,8 @@ public class StudentEndpoint {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> getStudentById(@PathVariable("id") Long id){
+        verifyIfStudentExists(id);
         Student student = studentDAO.findById(id).get();
-
-        if(student == null){
-            return new ResponseEntity<>(new CustomErrorType("student not found"), HttpStatus.NOT_FOUND);
-        }
-
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
@@ -38,7 +35,6 @@ public class StudentEndpoint {
         return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
     }
 
-
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Student student){
         return new ResponseEntity<>(studentDAO.save(student), HttpStatus.CREATED);
@@ -46,13 +42,23 @@ public class StudentEndpoint {
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
+        verifyIfStudentExists(id);
         studentDAO.deleteById(id);
         return new ResponseEntity<>("Student was deleted", HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<?> update(@RequestBody Student student){
+       verifyIfStudentExists(student.getId());
        studentDAO.save(student);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    private void verifyIfStudentExists(Long id){
+        if(studentDAO.findById(id) == null){
+            throw new ResourceNotFoundException("Student not found for ID:" + id);
+        }
+    }
+
+
 }
