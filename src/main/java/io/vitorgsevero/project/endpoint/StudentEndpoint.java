@@ -6,9 +6,8 @@ import io.vitorgsevero.project.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 
 @RestController
@@ -30,8 +29,7 @@ public class StudentEndpoint {
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> getStudentById(@PathVariable("id") Long id) {
         verifyIfStudentExists(id);
-        System.out.println("studentDAO = " + studentDAO.findById(id));
-        Optional<Student> student = studentDAO.findById(id);
+        Student student = studentDAO.findById(id).get();
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
@@ -41,6 +39,7 @@ public class StudentEndpoint {
     }
 
     @PostMapping
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save(@RequestBody Student student){
         return new ResponseEntity<>(studentDAO.save(student), HttpStatus.CREATED);
     }
