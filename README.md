@@ -3,11 +3,11 @@
 
 ## Tech
 
-### Spring Data JPA
-### Error Handling
-### Spring Security
-### JUnit
-### MockMvc, Mockito
-### JWT Token
-### CORS
-### Swagger2
+- Spring Data JPA
+- Error Handling
+- Spring Security
+- JUnit
+- MockMvc, Mockito
+- JWT Token
+- CORS
+- Swagger2
