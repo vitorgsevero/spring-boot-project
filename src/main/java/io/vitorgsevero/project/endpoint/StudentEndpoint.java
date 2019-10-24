@@ -9,11 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("students")
 public class StudentEndpoint {
-
 
     private final StudentRepository studentDAO;
     @Autowired
@@ -27,10 +28,10 @@ public class StudentEndpoint {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getStudentById(@PathVariable("id") Long id){
         verifyIfStudentExists(id);
-        Student student = studentDAO.findById(id).get();
-        return new ResponseEntity<>(student, HttpStatus.OK);
+        Optional<Student> student = studentDAO.findById(id);
+        return new ResponseEntity<>(student,HttpStatus.OK);
     }
 
     @GetMapping(path = "findbyname/{name}")
@@ -59,7 +60,8 @@ public class StudentEndpoint {
     }
 
     private void verifyIfStudentExists(Long id){
-        if(studentDAO.findById(id) == null){
+        Optional<Student> student = studentDAO.findById(id);
+        if(!student.isPresent()){
             throw new ResourceNotFoundException("Student not found for ID:" + id);
         }
     }
