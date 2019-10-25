@@ -11,7 +11,7 @@ public class Student extends AbstractEntity{
     @NotEmpty(message = "The field name is required")
     private String name;
 
-    @Email
+    @Email(message = "Please enter a valid email address")
     @NotEmpty(message = "The field email is required")
     private String email;
 
