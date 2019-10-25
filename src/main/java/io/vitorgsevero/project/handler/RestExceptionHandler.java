@@ -38,8 +38,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException manvException, HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<FieldError> fieldErrors = manvException.getBindingResult().getFieldErrors();
-        String fields = fieldErrors.stream().map(FieldError::getField).collect(Collectors.joining(","));
-        String fieldMessages = fieldErrors.stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(","));
+        String fields = fieldErrors.stream().map(FieldError::getField).collect(Collectors.joining(", "));
+        String fieldMessages = fieldErrors.stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(", "));
         ValidationErrorDetails rfnDetails = ValidationErrorDetails.Builder
                             .newBuilder()
                             .timestamp(new Date().getTime())
