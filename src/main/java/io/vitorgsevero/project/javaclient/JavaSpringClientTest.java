@@ -13,10 +13,10 @@ public class JavaSpringClientTest {
         JavaClientDAO dao = new JavaClientDAO();
         System.out.println(dao.findById(111));
         //     System.out.println(dao.save(studentPost));
-   //     System.out.println(dao.findById(8));
+        //     System.out.println(dao.findById(8));
         //    System.out.println(dao.listAll());
        // dao.update(studentPost);
-  //      dao.delete(29);
+        dao.delete(29);
 
     }
 }
