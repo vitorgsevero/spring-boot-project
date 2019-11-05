@@ -42,7 +42,8 @@ public class StudentRepositoryTest  {
         this.studentRepository.save(student);
         student.setName("vitor2");
         student.setEmail("vitorgsevero2@gmail.com");
-        student = this.studentRepository.save(student);
+        this.studentRepository.save(student);
+        this.studentRepository.findById(student.getId());
         Assertions.assertThat(student.getName()).isEqualTo("vitor2");
         Assertions.assertThat(student.getEmail()).isEqualTo("vitorgsevero2@gmail.com");
     }

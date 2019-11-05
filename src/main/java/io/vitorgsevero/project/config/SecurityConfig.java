@@ -31,12 +31,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailService).passwordEncoder(new BCryptPasswordEncoder());
     }
-
-    /*    @Autowired
-    public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("vitorgsevero").password("{noop}vitor123").roles("USER")
-                .and()
-                .withUser("admin").password("{noop}admin").roles("USER", "ADMIN");
-    }*/
 }
