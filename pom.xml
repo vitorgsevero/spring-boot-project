@@ -8,6 +8,8 @@
     <artifactId>spring-boot-project</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
+    <name> Demo </name>
+    <description> Spring Boot Essentials Application </description>
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
@@ -73,4 +75,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>vitorgsevero</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
