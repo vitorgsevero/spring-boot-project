@@ -15,7 +15,7 @@ This class was created for be used for all other classes that need uses ID, equa
 public class AbstractEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    protected Long id;
 
     public Long getId() {
         return id;
