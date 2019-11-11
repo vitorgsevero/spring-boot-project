@@ -2,8 +2,6 @@ package io.vitorgsevero.project;
 
 import io.vitorgsevero.project.model.Student;
 import io.vitorgsevero.project.repository.StudentRepository;
-import org.apache.tomcat.util.bcel.Const;
-import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.validation.ConstraintViolationException;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 

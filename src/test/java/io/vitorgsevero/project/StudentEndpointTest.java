@@ -124,7 +124,7 @@ public class StudentEndpointTest {
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
     }
     @Test
-    public void createWhenNameIsNulShouldReturnStatusCode400BadRequest() throws Exception{
+    public void createWhenNameIsNulShouldReturnStatusCode400BadRequest() throws Exception {
         Student student = new Student(3L, null, "gus@gmail.com");
         BDDMockito.when(studentRepository.save(student)).thenReturn(student);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity("/v1/admin/students/", student, String.class);
@@ -132,7 +132,7 @@ public class StudentEndpointTest {
        Assertions.assertThat(responseEntity.getBody()).contains("fieldMessage", "The field name is required");
     }
     @Test
-    public void createShouldPersistDataAndReturnStatusCode201() throws Exception{
+    public void createShouldPersistDataAndReturnStatusCode201() throws Exception {
         Student student = new Student(3L, "Gustavo", "gus@gmail.com");
         BDDMockito.when(studentRepository.save(student)).thenReturn(student);
         ResponseEntity<Student> responseEntity = restTemplate.postForEntity("/v1/admin/students/", student, Student.class);
