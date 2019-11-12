@@ -51,7 +51,7 @@ public class StudentEndpointTokenTest {
     }
     @Before
     public void configAdminHeaders() {
-        String str = "{\"username\":\"vitorgsevero\",\"password\":\"vitorgsevero\"}";
+        String str = "{\"username\":\"vitorgsevero6\",\"password\":\"vitorgsevero\"}";
         HttpHeaders headers = restTemplate.postForEntity("/login", str, String.class).getHeaders();
         this.adminHeader = new HttpEntity<>(headers);
     }
@@ -121,7 +121,7 @@ public class StudentEndpointTokenTest {
         String token = protectedHeader.getHeaders().get("Authorization").get(0);
         BDDMockito.doNothing().when(studentRepository).deleteById(1L);
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/v1/admin/students/{id}", 1L).header("Authorization",token))
+                .delete("/v1/admin/students/{id}", 1L).header("Authorization", token))
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
     }
 
@@ -131,7 +131,7 @@ public class StudentEndpointTokenTest {
         BDDMockito.when(studentRepository.save(student)).thenReturn(student);
         ResponseEntity<String> response = restTemplate.exchange("/v1/admin/students/",POST, new HttpEntity<>(student,adminHeader.getHeaders()), String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(400);
-        Assertions.assertThat(response.getBody()).contains("fieldMessage", "O campo nome do estudante é obrigatório");
+        Assertions.assertThat(response.getBody()).contains("fieldMessage", "The field name is required");
     }
 
     @Test
