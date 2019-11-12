@@ -102,7 +102,7 @@ public class StudentEndpointTokenTest {
 
     @Test
     public void deleteWhenUserHasRoleAdminAndStudentExistsShouldReturnStatusCode200() {
-        BDDMockito.doNothing().when(studentRepository).delete(1L);
+        BDDMockito.doNothing().when(studentRepository).deleteById(8L);
         ResponseEntity<String> exchange = restTemplate.exchange("/v1/admin/students/1",DELETE,adminHeader, String.class);
         Assertions.assertThat(exchange.getStatusCodeValue()).isEqualTo(200);
     }
@@ -110,7 +110,7 @@ public class StudentEndpointTokenTest {
     @Test
     public void deleteWhenUserHasRoleAdminAndStudentDoesNotExistShouldReturnStatusCode404() throws Exception {
         String token = adminHeader.getHeaders().get("Authorization").get(0);
-        BDDMockito.doNothing().when(studentRepository).delete(1L);
+        BDDMockito.doNothing().when(studentRepository).deleteById(1L);
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/v1/admin/students/{id}", -1L).header("Authorization",token))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
@@ -119,7 +119,7 @@ public class StudentEndpointTokenTest {
     @Test
     public void deleteWhenUserDoesNotHaveRoleAdminShouldReturnStatusCode403() throws Exception {
         String token = protectedHeader.getHeaders().get("Authorization").get(0);
-        BDDMockito.doNothing().when(studentRepository).delete(1L);
+        BDDMockito.doNothing().when(studentRepository).deleteById(1L);
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/v1/admin/students/{id}", 1L).header("Authorization",token))
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
