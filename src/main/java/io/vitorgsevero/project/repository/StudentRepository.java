@@ -10,4 +10,5 @@ public interface StudentRepository extends PagingAndSortingRepository<Student, L
 
     List<Student> findByNameIgnoreCaseContaining(String name);
 
+    void delete(long id);
 }
