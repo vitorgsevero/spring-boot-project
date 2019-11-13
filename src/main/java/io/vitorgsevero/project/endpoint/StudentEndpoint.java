@@ -1,5 +1,8 @@
 package io.vitorgsevero.project.endpoint;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import io.vitorgsevero.project.error.ResourceNotFoundException;
 import io.vitorgsevero.project.model.Student;
 import io.vitorgsevero.project.repository.StudentRepository;
@@ -23,54 +26,56 @@ import java.util.Optional;
 public class StudentEndpoint {
 
     private final StudentRepository studentDAO;
+
     @Autowired
     public StudentEndpoint(StudentRepository studentDAO) {
         this.studentDAO = studentDAO;
     }
 
     @GetMapping(path = "admin/students")
-    public ResponseEntity<?> listAll(Pageable pageable){
+    @ApiOperation(value = "Return a list with all students", response = Student[].class)
+    public ResponseEntity<?> listAll(Pageable pageable) {
         System.out.println(studentDAO.findAll());
         return new ResponseEntity<>(studentDAO.findAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping(path = "protected/students/{id}")
-    public ResponseEntity<?> getStudentById(@PathVariable("id") Long id, Authentication authentication){
+    public ResponseEntity<?> getStudentById(@PathVariable("id") Long id, Authentication authentication) {
         System.out.println(authentication);
         verifyIfStudentExists(id);
         Optional<Student> student = studentDAO.findById(id);
-        return new ResponseEntity<>(student,HttpStatus.OK);
+        return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @GetMapping(path = "protected/students/findbyname/{name}")
-    public ResponseEntity<?> findStudentByName(@PathVariable String name){
+    public ResponseEntity<?> findStudentByName(@PathVariable String name) {
         return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
     }
 
     @PostMapping(path = "admin/students")
     @Transactional(rollbackFor = Exception.class)
-    public ResponseEntity<?> save(@Valid @RequestBody Student student){
+    public ResponseEntity<?> save(@Valid @RequestBody Student student) {
         return new ResponseEntity<>(studentDAO.save(student), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "admin/students/{id}")
-   // @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> delete(@PathVariable Long id){
+    // @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         verifyIfStudentExists(id);
         studentDAO.deleteById(id);
         return new ResponseEntity<>("Student was deleted", HttpStatus.OK);
     }
 
     @PutMapping(path = "admin/students")
-    public ResponseEntity<?> update(@RequestBody Student student){
-       verifyIfStudentExists(student.getId());
-       studentDAO.save(student);
+    public ResponseEntity<?> update(@RequestBody Student student) {
+        verifyIfStudentExists(student.getId());
+        studentDAO.save(student);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    private void verifyIfStudentExists(Long id){
+    private void verifyIfStudentExists(Long id) {
         Optional<Student> student = studentDAO.findById(id);
-        if(!student.isPresent()){
+        if (!student.isPresent()) {
             throw new ResourceNotFoundException("Student not found for ID: " + id);
         }
     }
