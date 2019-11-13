@@ -39,7 +39,14 @@ public class StudentEndpoint {
         return new ResponseEntity<>(studentDAO.findAll(pageable), HttpStatus.OK);
     }
 
+    @GetMapping(path = "protected/students/findbyname/{name}")
+    @ApiOperation(value = "Return a student by name", response = Student[].class)
+    public ResponseEntity<?> findStudentByName(@PathVariable String name) {
+        return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
+    }
+
     @GetMapping(path = "protected/students/{id}")
+    @ApiOperation(value = "Return a student by id", response = Student[].class)
     public ResponseEntity<?> getStudentById(@PathVariable("id") Long id, Authentication authentication) {
         System.out.println(authentication);
         verifyIfStudentExists(id);
@@ -47,18 +54,15 @@ public class StudentEndpoint {
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
-    @GetMapping(path = "protected/students/findbyname/{name}")
-    public ResponseEntity<?> findStudentByName(@PathVariable String name) {
-        return new ResponseEntity<>(studentDAO.findByNameIgnoreCaseContaining(name), HttpStatus.OK);
-    }
-
     @PostMapping(path = "admin/students")
+    @ApiOperation(value = "Save student", response = Student[].class)
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save(@Valid @RequestBody Student student) {
         return new ResponseEntity<>(studentDAO.save(student), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "admin/students/{id}")
+    @ApiOperation(value = "Delete student by id", response = Student[].class)
     // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         verifyIfStudentExists(id);
@@ -67,6 +71,7 @@ public class StudentEndpoint {
     }
 
     @PutMapping(path = "admin/students")
+    @ApiOperation(value = "Update student by id", response = Student[].class)
     public ResponseEntity<?> update(@RequestBody Student student) {
         verifyIfStudentExists(student.getId());
         studentDAO.save(student);
