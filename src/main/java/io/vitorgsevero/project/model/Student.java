@@ -1,11 +1,14 @@
 package io.vitorgsevero.project.model;
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 
 @Entity
+@Data
 public class Student extends AbstractEntity{
 
     @NotEmpty(message = "The field name is required")

@@ -1,5 +1,6 @@
 package io.vitorgsevero.project.docs;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -35,7 +36,7 @@ public class SwaggerConfig {
                         .build()))
                 .apiInfo(metaData());
     }
-
+    
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
                 .title("Spring Boot Essentials by Vítor Severo")
