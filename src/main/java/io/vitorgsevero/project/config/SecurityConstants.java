@@ -1,7 +1,5 @@
 package io.vitorgsevero.project.config;
 
-import java.util.concurrent.TimeUnit;
-
 public class SecurityConstants  {
 
     static final String SECRET = "vitorgsevero";

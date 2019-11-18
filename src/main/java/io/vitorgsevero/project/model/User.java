@@ -1,7 +1,5 @@
 package io.vitorgsevero.project.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;

@@ -1,12 +1,14 @@
 package io.vitorgsevero.project.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 public class Student extends AbstractEntity{
@@ -18,8 +20,9 @@ public class Student extends AbstractEntity{
     @NotEmpty(message = "The field email is required")
     private String email;
 
-    public Student(){}
 
+    public Student(){
+    }
 
     public Student(@NotEmpty(message = "The field name is required") String name, @Email(message = "Please enter a valid email address") @NotEmpty(message = "The field email is required") String email) {
         this.name = name;
