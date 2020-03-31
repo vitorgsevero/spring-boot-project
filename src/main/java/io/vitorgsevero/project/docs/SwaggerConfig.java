@@ -38,8 +38,8 @@ public class SwaggerConfig {
     
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
-                .title("Spring Boot Essentials by Vítor Severo")
-                .description("Online Course with the Spring Boot Essentials")
+                .title("Todos by Vítor Severo")
+                .description("To do list API")
                 .version("1.0")
                 .contact(new Contact("Vítor Severo", "https://vitorgsevero.github.io/myPortfolio/", "vitorgsevero@gmail.com"))
                 .license("Apache License Version 2.0")
