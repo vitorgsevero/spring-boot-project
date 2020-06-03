@@ -1,4 +1,4 @@
-package io.vitorgsevero.project;
+/*package io.vitorgsevero.project;
 
 import io.vitorgsevero.project.model.Student;
 import io.vitorgsevero.project.repository.StudentRepository;
@@ -94,3 +94,4 @@ public class StudentRepositoryTest  {
 //    }
 
 }
+*/
