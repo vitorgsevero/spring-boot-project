@@ -1,5 +1,7 @@
 # Spring Boot Project
 
+![Java CI with Maven](https://github.com/vitorgsevero/spring-boot-project/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
+
 
 ## Tech
 
