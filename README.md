@@ -9,7 +9,8 @@
 - Error Handling
 - Spring Security
 - JUnit
-- MockMvc, Mockito
+- MockMvc
+- Mockito
 - JWT Token
 - CORS
 - Swagger2
