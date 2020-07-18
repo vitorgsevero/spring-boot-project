@@ -1,14 +1,8 @@
-# Basic dependabot.yml file with
-# minimum configuration for two package managers
-
 version: 2
 updates:
-  # Enable version updates for maven
-  - package-ecosystem: "maven"
-    # Look for `pox.xml` files in the `root` directory
-    directory: "/"
-    # Check the maven registry for updates every day (weekdays)
-    schedule:
-      interval: "daily"
-    # Allow up to 20 open pull requests for pip dependencies
-    open-pull-requests-limit: 20
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "08:00"
+  open-pull-requests-limit: 10
